@@ -6,8 +6,6 @@ const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
 
-const port = 3000;
-
 const Twitter = require("twitter-node-client").Twitter;
 
 const TWITTER_CONFIG_INFO = {
@@ -72,4 +70,4 @@ function getTweets(req, res) {
 		});
 }
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(process.env.PORT, () => console.log(`Example app listening on process.env.PORT ${process.env.PORT}!`))
