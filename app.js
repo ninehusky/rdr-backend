@@ -26,6 +26,24 @@ app.get("/getTumblrInfo", (req, res) => {
 	getTumblrInfo(req, res);
 });
 
+app.get("/getSpinitronPersonas", (req, res) => {
+	spinitronEndpoints(req, res, "personas");
+});
+
+app.get("/getSpinitronSpins", (req, res) => {
+	spinitronEndpoints(req, res, "spins");
+});
+
+
+function spinitronEndpoints(req, res, type) {
+	const baseURL = "https://spinitron.com/api/" + type;
+	fetch(baseURL + "?access-token=" + process.env.SPINITRON_ACCESS_TOKEN)
+		.then(response => response.json())
+		.then(response => res.json(response))
+		.catch(console.error);
+}
+
+
 // Sends JSON containing tumblr information.
 // Tbh I'm not entirely sure of the logistics of this, but
 // this seems to be a better way of handling things.
