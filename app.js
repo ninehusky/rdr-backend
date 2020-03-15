@@ -27,7 +27,15 @@ app.get("/getTumblrInfo", (req, res) => {
 });
 
 app.get("/getSpinitronPersonas", (req, res) => {
-	spinitronEndpoints(req, res, "personas");
+	let baseURL = "https://spinitron.com/api/personas?";
+	baseURL += "access-token=" + process.env.SPINITRON_ACCESS_TOKEN;
+	if (req.query.page) {
+		baseURL += "&page=" + req.query.page;
+	}
+	fetch(baseURL)
+		.then(response => response.json())
+		.then(response => res.json(response))
+	  .catch(console.error);
 });
 
 app.get("/getSpinitronSpins", (req, res) => {
