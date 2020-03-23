@@ -27,6 +27,7 @@ app.get("/getTumblrInfo", (req, res) => {
 });
 
 app.get("/getSpinitronPersonas", (req, res) => {
+	res.header("Access-Control-Allow-Origin", "*");
 	let baseURL = "https://spinitron.com/api/personas?";
 	baseURL += "access-token=" + process.env.SPINITRON_ACCESS_TOKEN;
 	if (req.query.page) {
@@ -44,6 +45,7 @@ app.get("/getSpinitronSpins", (req, res) => {
 
 
 function spinitronEndpoints(req, res, type) {
+	res.header("Access-Control-Allow-Origin", "*");
 	const baseURL = "https://spinitron.com/api/" + type;
 	fetch(baseURL + "?access-token=" + process.env.SPINITRON_ACCESS_TOKEN)
 		.then(response => response.json())
